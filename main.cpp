@@ -34,11 +34,13 @@ void get_barycentric(Point p, Point a, Point b, Point c, float &alpha, float &be
     alpha = 1.0f - beta - gamma;
 }
 
-int clamp(int value) {
+int clamp(float value) {
     if(value > 255)
         return 255;
     else if(value < 0)
         return 0;
+    else
+        return value;
 }
 
 void abg() {
@@ -60,12 +62,9 @@ void abg() {
 //            if ((alpha < 0.0) || (beta < 0.0) || (gamma < 0.0))
 //                continue;
 
-            Color color_r = clamp((alpha * triangle.A.color.r) + (beta * triangle.B.color.r)
-                     + (gamma * triangle.C.color.r));
-            Color color_g = clamp((alpha * triangle.A.color.g) + (beta * triangle.B.color.g)
-                           + (gamma * triangle.C.color.g));
-            Color color_b = clamp((alpha * triangle.A.color.b) + beta * (triangle.B.color.b)
-                           + (gamma * triangle.C.color.b));
+            Color color_r = clamp(100 + (100 * alpha));
+            Color color_g = clamp(100 + (100 * beta));
+            Color color_b = clamp(100 + (100 * gamma));
 
             image[x][y].r = color_r;
             image[x][y].g = color_g;
