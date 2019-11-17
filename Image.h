@@ -50,13 +50,7 @@ public:
             }
             outFile << std::endl;
         }
-//
-//        for(auto & row : image) {
-//            for(auto & pixel : row) {
-//                outFile << (int) pixel.r << " " << (int) pixel.g << " " << (int) pixel.b << " ";
-//            }
-//            outFile << std::endl;
-//        }
+
         outFile.close(); //  close file
 
         std::cout << f_name << " has been generated" << std::endl;
