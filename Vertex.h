@@ -20,12 +20,14 @@ struct Point {
     Point(Position x, Position y) : x(x), y(y) {}
 
     Vector operator - (Point other) {
-        return {other.x - x, y = other.y - y};
+        return {other.x - x, other.y - y};
     }
 };
 
 struct RGB {
     Color r, g, b;
+
+    RGB() = default;
 
     RGB(Color r, Color g, Color b) : r(r), g(g), b(b) {}
 };
