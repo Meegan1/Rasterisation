@@ -3,4 +3,4 @@ project(Assignment_3)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Assignment_3 main.cpp Image.h Triangle.h Vertex.h Texture.h)
+add_executable(Assignment_3 main.cpp Image.h Image.cpp Triangle.h Vertex.h Texture.h Texture.cpp Render.cpp Render.h)

@@ -3,61 +3,25 @@
 //
 
 #include <fstream>
+#include "Image.h"
 
 #ifndef ASSIGNMENT_3_TEXTURE_H
 #define ASSIGNMENT_3_TEXTURE_H
 
 #endif //ASSIGNMENT_3_TEXTURE_H
 
+/*
+ * Loads texture into Image
+ */
 struct Texture {
     Image texture;
 
-    explicit Texture(const char* fileName) {
-        // open the input file
-        std::ifstream inFile(fileName);
-        if (inFile.bad())
-            return;
+    // Load texture from file
+    explicit Texture(const char* fileName);
 
-        // get length of file
-        inFile.seekg (0, inFile.end);
-        long length = inFile.tellg();
-        inFile.seekg (0, inFile.beg);
+    // Subscript overload to allow for texture to be access [x][y]
+    std::vector<RGB> & operator[] (int x);
 
-        std::string string;
-        inFile >> string;
-        if(string != "P3") // file not valid ppm
-            return;
-
-        inFile.ignore(length, '\n'); // skip line
-        inFile.ignore(length, '\n'); // skip comment
-
-        int width, height;
-        inFile >> width >> height; // get dimensions
-
-        inFile.ignore(length, '\n'); // skip line
-        inFile.ignore(length, '\n'); // skip max value
-
-        texture = Image(width, height); // create object to store texture
-
-        // read through file to get colors
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
-                int r, g, b;
-                inFile >> r >> g >> b;
-
-                texture[x][height-y].r = r;
-                texture[x][height-y].g = g;
-                texture[x][height-y].b = b;
-            }
-        }
-        inFile.close(); // close file
-    }
-
-    std::vector<RGB> & operator[] (int x) {
-        return texture[x];
-    }
-
-    Image * operator -> () {
-        return &texture;
-    }
+    // Arrow operator overload to allow Image methods to be accessed
+    Image * operator -> ();
 };
